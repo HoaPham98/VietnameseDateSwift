@@ -9,9 +9,9 @@ import Foundation
 
 public extension LunarDate {
     struct Info {
-        var date: CanChi
-        var month: CanChi
-        var year: CanChi
+        public var date: CanChi
+        public var month: CanChi
+        public var year: CanChi
     }
     
     var info: Info {
