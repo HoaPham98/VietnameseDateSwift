@@ -1,6 +1,8 @@
 # VietnameseLunarDateSwift
 
 ![GitHub release (release name instead of tag name)](https://img.shields.io/github/v/release/HoaPham98/VietnameseLunarDateSwift?include_prereleases&label=version)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FHoaPham98%2FVietnameseLunarDateSwift%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/HoaPham98/VietnameseLunarDateSwift)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FHoaPham98%2FVietnameseLunarDateSwift%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/HoaPham98/VietnameseLunarDateSwift)
 
 Library for convert a day to Vietnamese lunar day. The library use Hồ Ngọc Đức's algorimth. Go to the link bellow for more detail http://www.informatik.uni-leipzig.de/~duc/amlich/
 

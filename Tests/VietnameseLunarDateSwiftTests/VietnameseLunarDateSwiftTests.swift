@@ -55,10 +55,10 @@ final class VietnameseLunarDateSwiftTests: XCTestCase {
     }
     
     func testJulius() throws {
-        let date = calendar.date(from: DateComponents(year: 0, month: 2, day: 21))!
-        let _ = LunarDate(from: date)
-        let _ = LunarDate(from: calendar.date(from: DateComponents(year: 2023, month: 12, day: 21))!)
-        XCTAssertTrue(true)
+        let earlyDate = calendar.date(from: DateComponents(year: 1582, month: 10, day: 04))!
+        XCTAssertEqual(earlyDate.toJuliusDays(), 2299160)
+        let lateDate = calendar.date(from: DateComponents(year: 1582, month: 10, day: 15))!
+        XCTAssertEqual(lateDate.toJuliusDays(), 2299161)
     }
     
     func testCanChi() throws {
