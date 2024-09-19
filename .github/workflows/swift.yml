@@ -21,8 +21,9 @@ jobs:
     - name: Garther test report
       run: |
         XCTEST_PATH="$(find . -name '*.xctest')"
-        xcrun llvm-cov export ${XCTEST_PATH}/Contents/MacOS/*PackageTests -instr-profile .build/debug/codecov/default.profdata -ignore-filename-regex='.build/|Tests/'
+        xcrun llvm-cov export ${XCTEST_PATH}/Contents/MacOS/*PackageTests -instr-profile .build/debug/codecov/default.profdata -ignore-filename-regex='.build/|Tests/' > info.lcov
     - name: Upload results to Codecov
       uses: codecov/codecov-action@v4
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
+        files: info.lcov
