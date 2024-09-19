@@ -16,14 +16,11 @@ jobs:
       - name: Test
         uses: actions/checkout@v1
       - run: swift test --enable-code-coverage
-      - uses: michaelhenry/swifty-code-coverage@v1.0.0
-        with:
-          build-path: .build
-          target: VietnameseLunarDateSwift.xctest
-          is-spm: true
+      - name: Test coverage
+        uses: maxep/spm-lcov-action@0.3.0
       - name: Upload to Codecov
         run: |
-          bash <(curl https://codecov.io/bash) -f "coverage/*.info"
+          bash <(curl https://codecov.io/bash) -f ".build/debug/codecov/lcov.info"
         shell: bash
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
