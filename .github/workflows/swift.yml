@@ -14,14 +14,12 @@ jobs:
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v4
-    - name: Build
-      run: swift build -v
     - name: Run tests
       run: swift test --enable-code-coverage
     - name: Garther test report
       run: |
         XCTEST_PATH="$(find . -name '*.xctest')"
-        xcrun llvm-cov export ${XCTEST_PATH}/Contents/MacOS/*PackageTests -instr-profile .build/debug/codecov/default.profdata -ignore-filename-regex='.build/|Tests/' > info.lcov
+        xcrun llvm-cov export ${XCTEST_PATH}/Contents/MacOS/*PackageTests -instr-profile .build/debug/codecov/default.profdata > info.lcov
     - name: Upload results to Codecov
       uses: codecov/codecov-action@v4
       with:
