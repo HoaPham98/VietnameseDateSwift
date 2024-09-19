@@ -10,17 +10,20 @@ on:
     branches: [ "main" ]
 
 jobs:
-  code-coverage-report:
-    runs-on: ubuntu-latest
+  build:
+    runs-on: macos-latest
     steps:
-      - name: Test
-        uses: actions/checkout@v1
-      - run: swift test --enable-code-coverage
-      - name: Test coverage
-        uses: maxep/spm-lcov-action@0.3.0
-      - name: Upload to Codecov
-        run: |
-          bash <(curl https://codecov.io/bash) -f ".build/debug/codecov/lcov.info"
-        shell: bash
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+    - uses: actions/checkout@v4
+    - name: Build
+      run: swift build -v
+    - name: Run tests
+      run: swift test --enable-code-coverage
+    - name: Garther test report
+      run: |
+        XCTEST_PATH="$(find . -name '*.xctest')"
+        xcrun llvm-cov export ${XCTEST_PATH}/Contents/MacOS/*PackageTests -instr-profile .build/debug/codecov/default.profdata > info.lcov
+    - name: Upload results to Codecov
+      uses: codecov/codecov-action@v4
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        files: info.lcov
