@@ -71,4 +71,24 @@ final class VietnameseLunarDateSwiftTests: XCTestCase {
         XCTAssertEqual(info.month, CanChi(.quy, .dau)) // Quy Dau
         XCTAssertEqual(info.year, CanChi(.giap, .thin)) // Giap Thin
     }
+    
+    func testInitFromSolarDate_MonthAdjustment() {
+        let solarDate = Calendar.current.date(from: DateComponents(year: 2024, month: 11, day: 15))!
+        let lunarDate = LunarDate(from: solarDate)
+        
+        XCTAssertEqual(lunarDate.year, 2024)
+        XCTAssertEqual(lunarDate.month, 10) // Month should adjust back within range
+        XCTAssertEqual(lunarDate.day, 15)
+        XCTAssertFalse(lunarDate.leap)
+    }
+    
+    func testA11LessThanMonthStart() {
+        let solarDate = Calendar(identifier: .gregorian).date(from: DateComponents(year: 2022, month: 12, day: 30))!
+        let lunarDate = LunarDate(from: solarDate)
+        
+        // We need to ensure that the lunarDate calculations handle the case where a11 < monthStart correctly
+        XCTAssertTrue(lunarDate.year == 2022)
+        XCTAssertTrue(lunarDate.month == 12)
+        XCTAssertTrue(lunarDate.day == 8)
+    }
 }
